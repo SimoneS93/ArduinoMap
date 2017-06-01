@@ -25,17 +25,22 @@ class MapInterface {
          * Put item into the Map.
          * Returns true on success, false on failure.
          */
-        virtual bool put(K key, V* value) = 0;
+        virtual bool put(const K key, V* value) = 0;
 
         /**
          * Read item from the Map
          */
-        virtual V* get(K key) = 0;
+        virtual V* get(const K key) = 0;
 
         /**
          * Check if key exists in the Map
          */
-        virtual bool has(K key) = 0;
+        virtual bool has(const K key) = 0;
+
+        /**
+         * Just syntactic sugar for the get method
+         */
+        virtual V* operator[] (const K key) = 0;
 };
 
 

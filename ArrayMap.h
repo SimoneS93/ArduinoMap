@@ -18,11 +18,13 @@ template<typename K, typename V>
 class ArrayMap : public MapInterface<K, V> {
     public:
 
-        bool has(K key);
+        bool has(const K key);
 
-        bool put(K key, V* value);
+        bool put(const K key, V* value);
 
-        V* get(K key);
+        V* get(const K key);
+
+        V* operator[] (const K key);
 
     private:
         /**
@@ -38,7 +40,7 @@ class ArrayMap : public MapInterface<K, V> {
         /**
          * Get index of key in the array
          */
-        uint8_t find(K key);
+        uint8_t find(const K key);
 };
 
 #endif

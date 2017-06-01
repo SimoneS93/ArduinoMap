@@ -8,7 +8,7 @@
  *
  */
 template<typename K, typename V>    
-bool ArrayMap<K, V>::put(K key, V* value) {
+bool ArrayMap<K, V>::put(const K key, V* value) {
     MapItem<K, V> item;
     uint8_t index = has(key) ? find(key) - 1 : it++;
 
@@ -28,7 +28,7 @@ bool ArrayMap<K, V>::put(K key, V* value) {
  *
  */
 template<typename K, typename V>   
-V* ArrayMap<K, V>::get(K key) {
+V* ArrayMap<K, V>::get(const K key) {
     if (has(key)) {
         return items[find(key) - 1].value;
       }
@@ -40,7 +40,7 @@ V* ArrayMap<K, V>::get(K key) {
  *
  */
 template<typename K, typename V>   
-bool ArrayMap<K, V>::has(K key) {
+bool ArrayMap<K, V>::has(const K key) {
     return find(key) > 0;
 }
 
@@ -48,7 +48,15 @@ bool ArrayMap<K, V>::has(K key) {
  *
  */
 template<typename K, typename V>   
-uint8_t ArrayMap<K, V>::find(K key) {
+V* ArrayMap<K, V>::operator[] (const K k) {
+    return get(k);
+}
+
+/**
+ *
+ */
+template<typename K, typename V>   
+uint8_t ArrayMap<K, V>::find(const K key) {
     for (uint8_t i = 0; i < it; i++) {
         if (items[i].key == key)
             return i+1;
